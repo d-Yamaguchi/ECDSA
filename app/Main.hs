@@ -19,9 +19,7 @@ orderN n = do
   p <- get
   case p of
     Infinity -> return n
-    Point x y -> do
-                 put (p + g)
-                 orderN (succ n)
+    Point x y -> put (p + g) >> orderN (succ n)
 
 g = Point 0 2032
 
