@@ -15,6 +15,7 @@ basePoint = head $ filter infCondition [(x,y)|x<-[0..5556],y<-[0..5556]]
     infCondition l = (snd l^2) `eqMod5557` (fst l^3 + 17*fst l + 173)
 
 orderN :: Int -> State HECC5557 Int
+orderN 100000000 = get >> return 0
 orderN n = do
   p <- get
   case p of
