@@ -21,7 +21,12 @@ orderN n = do
     Infinity -> return n
     Point x y -> put (p + g) >> orderN (succ n)
 
-g = Point 0 2032
+g = Point x1 y1
+  where
+    x1 = fst basePoint
+    y1 = snd basePoint
+
+
 
 --n G = Infinity
 n = 500
