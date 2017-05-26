@@ -8,26 +8,23 @@ import Control.Monad.State
 main :: IO ()
 main = someFunc
 
-basePoint :: (Int,Int)
-basePoint = head $ filter infCondition [(x,y)|x<-[0..5556],y<-[0..5556]]
+basePoints :: [(Int,Int)]
+basePoints = take 10 $ filter infCondition [(x,y)|x<-[1..p],y<-[1..p]]
   where
-    eqMod5557 alpha beta = alpha `mod` 5557 == beta `mod` 5557
+    eqMod5557 alpha beta = alpha `mod` p == beta `mod` p
     infCondition l = (snd l^2) `eqMod5557` (fst l^3 + 17*fst l + 173)
+    p = 5557
 
-orderN :: Int -> State HECC5557 Int
-orderN 100000000 = get >> return 0
-orderN n = do
-  p <- get
-  case p of
-    Infinity -> return n
-    Point x y -> put (p + g) >> orderN (succ n)
+orderN :: Int -> HECC5557 -> Int
+orderN n Infinity = n
+orderN n p
+     | n == 5000 = -1
+     | otherwise = orderN (n + 1) (p + g)
 
-g = Point x1 y1
-  where
-    x1 = fst basePoint
-    y1 = snd basePoint
+g = undefined
 
-
+gSet :: (Int, Int) -> HECC5557
+gSet = uncurry Point
 
 --n G = Infinity
 n = 500
