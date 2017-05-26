@@ -16,7 +16,8 @@ instance Num HECC5557 where
         nu | eqModP x1 x2  = ((-x1)^ (3::Int) + a4*x1 + 2*a6 - a3*y1) `modDiv` (2*y1 + a1*x1 + a3)
           | otherwise = (y1 * x2 - y2 * x1) `modDiv` (x2 - x1)
         (a1,a2,a3,a4,a6) = (0,0,0,17,173)
-        modDiv alpha beta = head $ filter (\gamma -> alpha `eqModP` (gamma * beta)) [1..5557]
+        modDiv alpha beta = (alpha * (beta ^ (5775 :: Int))) `mod` 5557
+        eqModP alpha beta = alpha `mod` 5557 == beta `mod` 5557
   (+) p Infinity = p
   (+) a b = (+) b a
   (-) a (Point x2 y2) = (+) a (Point x2 (-1*y2))
@@ -28,5 +29,3 @@ instance Num HECC5557 where
 
 (×) :: Int -> HECC5557 -> HECC5557
 (×) a rho = foldl (+) rho $ replicate (a-1) rho
-
-eqModP alpha beta = alpha `mod` 5557 == beta `mod` 5557
